@@ -1,5 +1,5 @@
 
-```markdown
+
 # 📊 Statistical Arbitrage in Commodity Futures
 
 This project implements a **statistical arbitrage strategy** on **Brent and WTI crude oil futures**, modeling their spread using linear regression and identifying trading signals through z-scores. A custom-built **React.js web dashboard** is included to visualize strategy performance and insights.
@@ -166,4 +166,4 @@ Pull requests, issues, and ideas are welcome! Feel free to fork and extend.
 ```
 
 Let me know if you also want a preview `screenshot.png` section or a `requirements.txt` scaffold!
-```
+
