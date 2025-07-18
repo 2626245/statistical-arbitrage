@@ -1,28 +1,23 @@
-Great — now that you've pushed successfully, here’s a complete, professional `README.md` you can include in your GitHub repo, based on your PDF and React-based dashboard project.
-
----
-
-### ✅ `README.md` (for `statistical-arbitrage` project)
 
 ```markdown
-#  Statistical Arbitrage in Commodity Futures
+# 📊 Statistical Arbitrage in Commodity Futures
 
 This project implements a **statistical arbitrage strategy** on **Brent and WTI crude oil futures**, modeling their spread using linear regression and identifying trading signals through z-scores. A custom-built **React.js web dashboard** is included to visualize strategy performance and insights.
 
 ## 🛠 Tech Stack
 
-| Layer         | Technology                      |
-|--------------|----------------------------------|
-| Backend       | Python, Pandas, NumPy, Statsmodels |
-| Frontend      | React.js, TypeScript, Material UI |
-| Data Source   | Yahoo Finance (via `yfinance`)    |
-| Version Control | Git & GitHub                   |
+| Layer         | Technology                          |
+|---------------|--------------------------------------|
+| Backend       | Python, Pandas, NumPy, Statsmodels   |
+| Frontend      | React.js, TypeScript, Material UI    |
+| Data Source   | Yahoo Finance (via `yfinance`)       |
+| Version Control | Git & GitHub                       |
 
 ---
 
-##  Strategy Overview
+## 📐 Strategy Overview
 
-Statistical arbitrage exploits **mean-reverting behavior** between correlated assets. Here, we use the historical cointegration between Brent (`BZ=F`) and WTI (`CL=F`) crude oil futures these two assets have shown to have a high correlation between them and they have explaoited the contegency of how stable they are in the long run providing equilibrium.
+Statistical arbitrage exploits **mean-reverting behavior** between correlated assets. Here, we use the historical cointegration between Brent (`BZ=F`) and WTI (`CL=F`) crude oil futures.
 
 ### 🔁 1. Spread Modeling via Regression
 
@@ -35,12 +30,16 @@ Spread = Brent − (β × WTI + Intercept)
 ```
 
 Where:
-- `β` =  (hedge ratio) 
-- `Intercept` 
+- **β (beta)** = 1.0120 → Hedge ratio
+- **Intercept** = 3.7406 → Structural offset
+
+This models the spread as a stationary time series, filtering out long-term trends and highlighting short-term mispricings.
+
+---
 
 ### 📊 2. Z-Score Signal Generation
 
-We compute the z-score to normalize the spread:
+To normalize and identify trading signals:
 
 ```
 
@@ -49,63 +48,71 @@ z = (Spread - Mean) / StandardDeviation
 ````
 
 #### Signal Rules:
-| Signal Type  | Condition          | Action                        |
-|--------------|--------------------|-------------------------------|
-| Buy (Long)   | z < -2             | Buy Brent, Sell WTI           |
-| Sell (Short) | z > 2              | Sell Brent, Buy WTI           |
-| Close        | -0.5 < z < 0.5     | Close all positions           |
+| Signal Type  | Condition         | Action                       |
+|--------------|-------------------|------------------------------|
+| Buy (Long)   | z < -2            | Buy Brent, Sell WTI          |
+| Sell (Short) | z > 2             | Sell Brent, Buy WTI          |
+| Close        | -0.5 < z < 0.5    | Close all positions          |
 
 ---
 
 ## 🛡️ Risk Management
 
 - **Volatility filter**: Only trade when spread change > 0.5
+- **Minimum holding period**: At least 5 days to reduce overtrading
 - **Dynamic position sizing**: Inverse of rolling std deviation
-- **Trailing stop-loss**: Cut losses beyond 0.02
-- **Take profit**: 4× spread standard deviation
+- **Stop-loss**: 2× standard deviation
+- **Take-profit**: 4× standard deviation
+- **Trailing stop-loss**: 0.02 on spread change
 
 ---
 
 ## 📈 Performance Highlights
 
-| Metric            | Value         | Notes                          |
-|-------------------|---------------|--------------------------------|
-| Total Net Return  | \$148.75      | Based on backtest period       |
-| Sharpe Ratio      | 0.98          | Strong risk-adjusted returns   |
-| Sortino Ratio     | 252.17        | High returns vs. downside risk |
-| Max Drawdown      | \$0.14        | Excellent downside protection  |
+| Metric            | Value        | Interpretation                            |
+|-------------------|--------------|--------------------------------------------|
+| Total Net Return  | $148.75      | Overall profitability                      |
+| Sharpe Ratio      | 0.98         | Risk-adjusted return                       |
+| Sortino Ratio     | 252.17       | Return vs. downside deviation              |
+| Max Drawdown      | $0.14        | Excellent downside protection              |
+| Calmar Ratio      | 133.47       | High returns relative to drawdown risk     |
 
 ---
 
 ## 🖥️ Dashboard Features (React App)
 
-- 🔄 Live signal status (Buy / Sell / Hold)
-- 📈 Cumulative strategy returns
-- 🔍 Current spread, beta, intercept values
-- 📊 Responsive chart components (Material UI + Charts)
-- 🧠 Clear visualization of how the strategy works
+- 🔄 **Live Signal Status**: Buy / Sell / Hold
+- 📈 **Cumulative Returns**: Strategy PnL over time
+- 📊 **Spread Metrics**: Live display of current spread, beta, and intercept
+- 📉 **Signal Generation Charts**
+- 📱 **Responsive Design** using Material UI
 
 ---
 
 ## 🧪 How to Run the Project Locally
 
-### 📦 Backend (Python)
+### 📦 Backend (Python Strategy Script)
 
 1. Clone the repo:
    ```bash
    git clone https://github.com/2626245/statistical-arbitrage.git
-   cd statistical-arbitrage
+   cd "statistical-arbitrage"
 ````
 
-2. Create a virtual environment and install dependencies:
+2. Create a virtual environment and activate:
 
    ```bash
    python -m venv venv
-   venv\Scripts\activate     # On Windows
+   venv\Scripts\activate   # On Windows
+   ```
+
+3. Install dependencies:
+
+   ```bash
    pip install -r requirements.txt
    ```
 
-3. Run the strategy script:
+4. Run the main strategy script:
 
    ```bash
    python run_strategy.py
@@ -115,56 +122,48 @@ z = (Spread - Mean) / StandardDeviation
 
 ### 🌐 Frontend (React Dashboard)
 
-1. Go to the frontend folder:
+1. Go to the dashboard folder:
 
    ```bash
    cd dashboard
    ```
 
-2. Install dependencies:
+2. Install frontend dependencies:
 
    ```bash
    npm install
    ```
 
-3. Start the development server:
+3. Start the dev server:
 
    ```bash
    npm run dev
    ```
 
-4. Visit the app at: `http://localhost:5173`
+4. Open your browser and visit: `http://localhost:5173`
 
 ---
 
 ## 📚 Reference
 
-* Lavrentyev, N. (2025). *Statistical Arbitrage in Commodity Futures: A Case Study of Brent and WTI*
+* Lavrentyev, N. (2025). *Statistical Arbitrage in Commodity Futures*
 * Vidyamurthy, G. (2004). *Pairs Trading: Quantitative Methods and Analysis*
-* Statsmodels, Yahoo Finance, React.js Docs
+* Lopez de Prado, M. (2018). *Advances in Financial Machine Learning*
+* Yahoo Finance, React.js Docs, Statsmodels Docs
 
 ---
 
 ## ⚠️ Disclaimer
 
-This project is for **educational purposes only** and does not constitute financial advice. Past performance does not guarantee future results.
+This project is for **educational purposes only** and does not constitute financial advice. Backtested results assume ideal conditions and may not reflect live trading performance.
 
 ---
 
 ## 🙌 Contributions
 
-Pull requests and feedback are welcome!
-
----
+Pull requests, issues, and ideas are welcome! Feel free to fork and extend.
 
 ```
 
----
-
-Let me know if you want me to:
-- Create the `requirements.txt` from your code
-- Auto-generate images or charts for the README
-- Write an `About` section for LinkedIn or portfolio
-
-Just say the word.
+Let me know if you also want a preview `screenshot.png` section or a `requirements.txt` scaffold!
 ```
