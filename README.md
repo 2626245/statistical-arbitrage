@@ -30,8 +30,8 @@ Spread = Brent − (β × WTI + Intercept)
 
 
 Where:
-- `β` = 1.0120 (hedge ratio)
-- `Intercept` = 3.7406
+- `β` =  (hedge ratio)
+- `Intercept` = represents a baseline offset between the two prices
 
 ### 📊 2. Z-Score Signal Generation
 
