@@ -89,21 +89,22 @@ z = (Spread - Mean) / StandardDeviation
 1. Clone the repo:
    
    git clone https://github.com/2626245/statistical-arbitrage.git
-   cd statistical-arbitrage
+   npm install
+   
 
 
-2. Create a virtual environment and install dependencies:
+3. Create a virtual environment and install dependencies or you can install python dependencies:
+   
 
    
    python -m venv venv
    venv\Scripts\activate     # On Windows
-   pip install -r requirements.txt
+   
    
 
-3. Run the strategy script:
-
+4. Run the strategy script for the backend on the folder:
    
-   python run_strategy.py
+   python app.py
    
 
 ---
@@ -113,16 +114,13 @@ z = (Spread - Mean) / StandardDeviation
 1. Go to the frontend folder:
 
    
-   cd dashboard
+   cd statistical-arbitrage-trading
    
 
-2. Install dependencies:
 
    
-   npm install
-   
 
-3. Start the development server:
+2. Start the development server:
 
    
    npm run dev
