@@ -1,4 +1,3 @@
-### ✅ `README.md` (for `statistical-arbitrage` project)
 
 
 # 📊 Statistical Arbitrage in Commodity Futures
